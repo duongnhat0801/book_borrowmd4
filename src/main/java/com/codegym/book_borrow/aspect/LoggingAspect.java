@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @After("execution(* com.example.library_app.services.borrow.impl.BorrowService.borrowBook(..))")
+    @After("execution(* com.codegym.book_borrow.services.borrow.impl.BorrowService.borrowBook(..))")
     public void logBorrowAction() {
         logger.info("Một cuốn sách đã được mượn");
     }
 
-    @After("execution(* com.example.library_app.services.borrow.impl.BorrowService.returnBook(..))")
+    @After("execution(* com.codegym.book_borrow.services.borrow.impl.BorrowService.returnBook(..))")
     public void logReturnAction() {
         logger.info("Một cuốn sách đã được trả");
     }
 
-    @Before("execution(* com.example.library_app.controllers..*(..))")
+    @Before("execution(* com.codegym.book_borrow.controllers..*(..))")
     public void logVisitor() {
         logger.info("Một người dùng đã truy cập thư viện.");
     }

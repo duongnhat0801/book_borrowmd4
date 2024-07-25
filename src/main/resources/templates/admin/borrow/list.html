@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{layouts/admin :: head}"></th:block>
+    <title>Quản lý sách</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/admin :: navbar}"></th:block>
+<div class="container mt-5">
+    <table class="table table-hover table-bordered border-dark">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code Mượn Sách</th>
+            <th>Tên Người Mượn</th>
+            <th>Tên Sách</th>
+            <th>Tên Tác Giả</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="borrow : ${borrows}">
+            <td th:text="${borrow.id}"></td>
+            <td th:text="${borrow.code}"></td>
+            <td th:text="${borrow.bookRenter}"></td>
+            <td th:text="${borrow.book.title}"></td>
+            <td th:text="${borrow.book.author}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<th:block th:replace="layouts/library :: footer"></th:block>
+</body>
+</html>

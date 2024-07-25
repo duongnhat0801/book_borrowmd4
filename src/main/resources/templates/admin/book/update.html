@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{layouts/admin :: head}"></th:block>
+    <title>Thêm Sách</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/admin :: navbar}"></th:block>
+<div class="container">
+    <div class="w-50 p-5 mt-5 mx-auto shadow">
+        <h2 class="text-center mb-4">Chỉnh Sửa</h2>
+        <form th:object="${book}" action="/admin/books/update" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Tên Sách</label>
+                <input type="text" class="form-control" id="name" th:field="*{title}" required>
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Tác Giả</label>
+                <input type="text" class="form-control" id="author" th:field="*{author}" required>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Số Lượng</label>
+                <input type="number" class="form-control" id="quantity" th:field="*{quantity}" required>
+            </div>
+
+            <div class="text-end">
+                <a th:href="@{/admin/books}" class="btn btn-secondary me-1">Hủy bỏ</a>
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{layouts/admin :: head}"></th:block>
+    <title>Quản lý sách</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/admin :: navbar}"></th:block>
+<div class="container mt-5 shadow py-3 rounded-3">
+    <div class="text-end mb-3">
+        <a href="/admin/books/create" class="btn btn-primary">Thêm mới</a>
+    </div>
+    <table class="table table-hover table-bordered border-dark">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tên tác giả</th>
+            <th>số lượng</th>
+            <th>#</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.quantity}"></td>
+            <td width="150px" class="text-end">
+                <a th:href="@{/admin/books/{id}/update(id = ${book.id})}" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+                <a th:href="@{/admin/books/{id}/delete(id = ${book.id})}" class="btn btn-sm btn-danger delete">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<th:block th:replace="layouts/admin :: footer"></th:block>
+<script>
+    document.querySelectorAll(".delete").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            let url = el.getAttribute("href");
+            deleteConfirm(url)
+        })
+    })
+
+    function deleteConfirm(url) {
+        Swal.fire({
+            title: "Bạn chắc chắn muốn xóa?",
+            text: "Hành động này không thể hoàn tác!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Xác nhận",
+            cancelButtonText: "Hủy"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = url;
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
